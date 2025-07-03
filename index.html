@@ -19,6 +19,10 @@
                     <span class="btn-text">点击测试</span>
                     <div class="btn-glow"></div>
                 </button>
+                <button class="btn btn-tertiary" id="courseLotteryBtn">
+                    <span class="btn-text">开课抽奖</span>
+                    <div class="btn-glow"></div>
+                </button>
             </div>
         </div>
     </div>
@@ -68,13 +72,12 @@
             <button id="spinBtn" class="spin-btn">开始抽奖</button>
             <div id="result" class="result"></div>
             
-            <!-- 添加抽奖记录区域 -->
+            <!-- 修改抽奖记录区域，删除清空记录按钮 -->
             <div class="lottery-history">
                 <div class="history-header">
                     <h3>抽奖记录</h3>
                     <div class="history-stats">
                         <span id="totalCount">总次数: 0</span>
-                        <button id="clearHistory" class="clear-btn">清空记录</button>
                     </div>
                 </div>
                 <div id="historyList" class="history-list">
@@ -116,6 +119,83 @@
         </div>
     </div>
 
+    <!-- 在页面底部添加管理员入口 -->
+    <div class="admin-entrance">
+        <button id="adminBtn" class="admin-btn">管理员</button>
+    </div>
+    
+    <!-- 管理员登录模态框 -->
+    <div id="adminModal" class="modal admin-modal">
+        <div class="modal-content admin-content">
+            <div class="admin-header">
+                <h2>管理员登录</h2>
+                <span id="closeAdmin" class="close">&times;</span>
+            </div>
+            <div class="admin-login">
+                <input type="password" id="adminPassword" placeholder="请输入管理员密码">
+                <button id="loginBtn">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 管理员面板模态框 -->
+    <div id="adminPanelModal" class="modal admin-panel-modal">
+        <div class="modal-content admin-panel-content">
+            <div class="admin-header">
+                <h2>管理员面板</h2>
+                <span id="closeAdminPanel" class="close">&times;</span>
+            </div>
+            <div class="admin-panel">
+                <div class="admin-section">
+                    <h3>库存管理</h3>
+                    <button id="resetStockBtn" class="admin-action-btn">重置所有库存</button>
+                    <button id="viewStockBtn" class="admin-action-btn">查看库存状态</button>
+                </div>
+                <div class="admin-section">
+                    <h3>记录管理</h3>
+                    <button id="clearAllRecordsBtn" class="admin-action-btn">清空所有抽奖记录</button>
+                    <button id="exportRecordsBtn" class="admin-action-btn">导出抽奖记录</button>
+                </div>
+                <div class="admin-section">
+                    <h3>系统设置</h3>
+                    <button id="changePasswordBtn" class="admin-action-btn">修改管理员密码</button>
+                    <button id="resetSystemBtn" class="admin-action-btn">重置系统</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 库存管理模态框 -->
+    <div id="stockModal" class="stock-modal">
+        <div class="stock-content">
+            <div class="stock-header">
+                <h3>库存管理</h3>
+                <div class="stock-header-actions">
+                    <button id="saveStockBtn" class="save-stock-btn">保存修改</button>
+                    <button id="closeStock" class="close-btn">×</button>
+                </div>
+            </div>
+            <div class="stock-body">
+                <div class="stock-section">
+                    <h4>普通抽奖库存</h4>
+                    <div id="normalStockList" class="stock-list"></div>
+                </div>
+                <div class="stock-section">
+                    <h4>开课抽奖库存</h4>
+                    <div id="courseStockList" class="stock-list"></div>
+                </div>
+                <div class="stock-summary">
+                    <div class="summary-item">
+                        <span>普通抽奖总次数:</span>
+                        <span id="normalTotal">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>开课抽奖总次数:</span>
+                        <span id="courseTotal">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
