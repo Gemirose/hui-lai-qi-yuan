@@ -176,6 +176,85 @@ const questionBank7to9 = [
     }
 ];
 
+// 10-12岁题库（趣味常识题）
+const questionBank10to12 = [
+    {
+        question: "植物进行光合作用，主要吸收哪种气体，释放哪种气体？",
+        options: ["A) 吸收氧气，释放二氧化碳", "B) 吸收二氧化碳，释放氧气", "C) 吸收氮气，释放氢气"],
+        answer: "B) 吸收二氧化碳，释放氧气"
+    },
+    {
+        question: "我们听到雷声之前先看到闪电，这是因为什么？",
+        options: ["A) 眼睛比耳朵灵敏", "B) 闪电比雷声先产生", "C) 光传播得比声音快"],
+        answer: "C) 光传播得比声音快"
+    },
+    {
+        question: "地球上淡水（可以饮用的水）主要储存在哪里？",
+        options: ["A) 海洋", "B) 冰川、冰盖和地下水", "C) 河流和湖泊"],
+        answer: "B) 冰川、冰盖和地下水"
+    },
+    {
+        question: "指南针的指针总是指向什么方向？",
+        options: ["A) 南方", "B) 北方", "C) 东方"],
+        answer: "B) 北方"
+    },
+    {
+        question: "下列哪种行为有助于保护环境？",
+        options: ["A) 乱扔废旧电池", "B) 尽量步行或骑自行车上学", "C) 经常使用一次性塑料袋"],
+        answer: "B) 尽量步行或骑自行车上学"
+    },
+    {
+        question: "我们的身体中，将血液输送到全身各部位的器官是什么？",
+        options: ["A) 肺", "B) 胃", "C) 心脏"],
+        answer: "C) 心脏"
+    },
+    {
+        question: "下列哪种动物是哺乳动物？",
+        options: ["A) 鳄鱼", "B) 鲸鱼", "C) 企鹅"],
+        answer: "B) 鲸鱼"
+    },
+    {
+        question: "风是怎么形成的？",
+        options: ["A) 空气静止不动", "B) 冷热空气流动", "C) 地球转动甩出来的"],
+        answer: "B) 冷热空气流动"
+    },
+    {
+        question: "下列哪种食物主要为我们提供能量（热量）？",
+        options: ["A) 米饭、面条、面包", "B) 青菜、胡萝卜", "C) 牛奶、鸡蛋"],
+        answer: "A) 米饭、面条、面包"
+    },
+    {
+        question: "我们在课堂上、书本上使用的语言，通常叫什么？",
+        options: ["A) 口头语", "B) 方言", "C) 书面语"],
+        answer: "C) 书面语"
+    },
+    {
+        question: "自行车、房屋的屋顶架子常常做成三角形，主要是因为三角形有什么特点？",
+        options: ["A) 好看", "B) 稳定性好", "C) 容易制作"],
+        answer: "B) 稳定性好"
+    },
+    {
+        question: "发现有人触电了，第一件最重要的事情是什么？",
+        options: ["A) 马上用手去拉他", "B) 赶紧关掉电源开关或用干燥木棍挑开电线", "C) 大声喊叫"],
+        answer: "B) 赶紧关掉电源开关或用干燥木棍挑开电线"
+    },
+    {
+        question: "蚂蚁搬家常常预示着天气会怎样变化？",
+        options: ["A) 快要下雨了", "B) 快要天晴了", "C) 快要刮大风了"],
+        answer: "A) 快要下雨了"
+    },
+    {
+        question: "在沙漠中迷路，最需要优先考虑的是什么？",
+        options: ["A) 找到宝藏", "B) 寻找水源和阴凉", "C) 快速奔跑找路"],
+        answer: "B) 寻找水源和阴凉"
+    },
+    {
+        question: "遇到需要急救的病人（比如有人晕倒、严重受伤），我们应该拨打哪个紧急电话？",
+        options: ["A) 110", "B) 119", "C) 120"],
+        answer: "C) 120"
+    }
+];
+
 // 当前使用的题库
 let currentQuestionBank = questionBank4to6;
 
@@ -342,6 +421,13 @@ function start4to6Test() {
 // 开始7-9岁测试
 function start7to9Test() {
     currentQuestionBank = questionBank7to9;
+    closeAgeSelectionModal();
+    startTest();
+}
+
+// 开始10-12岁测试
+function start10to12Test() {
+    currentQuestionBank = questionBank10to12;
     closeAgeSelectionModal();
     startTest();
 }
@@ -825,6 +911,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeAgeSelectionBtn = document.getElementById('closeAgeSelection');
     const age4to6Btn = document.getElementById('age4to6Btn');
     const age7to9Btn = document.getElementById('age7to9Btn');
+    const age10to12Btn = document.getElementById('age10to12Btn');
 
     if (closeAgeSelectionBtn) {
         closeAgeSelectionBtn.addEventListener('click', closeAgeSelectionModal);
@@ -836,6 +923,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (age7to9Btn) {
         age7to9Btn.addEventListener('click', start7to9Test);
+    }
+
+    if (age10to12Btn) {
+        age10to12Btn.addEventListener('click', start10to12Test);
     }
 
     // 开课抽奖按钮
