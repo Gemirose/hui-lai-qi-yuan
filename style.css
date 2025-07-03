@@ -466,7 +466,7 @@ body::before {
     }
 }
 
-/* 年龄段选择模态框样式 */
+/* 年龄段选择模态框样式 - 美观配色版 */
 .age-selection-modal {
     display: none;
     position: fixed;
@@ -474,91 +474,307 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .age-selection-modal.show {
     display: flex;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
 .age-selection-content {
-    background: #f8f9fa;
-    border-radius: 15px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 24px;
     padding: 0;
-    max-width: 450px;
+    max-width: 520px;
     width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    border: 2px solid #e9ecef;
+    box-shadow: 
+        0 25px 50px rgba(15, 23, 42, 0.15),
+        0 10px 30px rgba(15, 23, 42, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(226, 232, 240, 0.8);
     overflow: hidden;
+    transform: scale(0.9);
+    animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes modalSlideIn {
+    to {
+        transform: scale(1);
+    }
 }
 
 .age-selection-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 25px;
-    border-bottom: 2px solid #dee2e6;
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    padding: 28px 32px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
     color: white;
+    position: relative;
+}
+
+.age-selection-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+    pointer-events: none;
 }
 
 .age-selection-header h2 {
     margin: 0;
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.7em;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.4em;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .age-selection-body {
-    padding: 30px 25px;
+    padding: 40px 32px;
     text-align: center;
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
 }
 
-.age-selection-body p {
-    font-size: 1.1em;
-    color: #495057;
-    margin-bottom: 25px;
+.selection-subtitle {
+    font-size: 1.15em;
+    color: #64748b;
+    margin-bottom: 32px;
     font-weight: 500;
+    letter-spacing: 0.3px;
 }
 
 .age-buttons {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .age-btn {
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-size: 1em;
-    font-weight: bold;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 24px 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
-    min-width: 100px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 20px rgba(15, 23, 42, 0.08),
+        0 1px 4px rgba(15, 23, 42, 0.06);
+    min-width: 150px;
     flex: 1;
-    max-width: 120px;
+    max-width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
 }
 
-.age-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
-    background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+.age-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    transition: left 0.6s ease;
+}
+
+.age-btn:hover::before {
+    left: 100%;
+}
+
+.age-btn-icon {
+    font-size: 2.4em;
+    margin-bottom: 6px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.age-btn-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.age-range {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: #334155;
+    transition: color 0.3s ease;
+}
+
+.age-desc {
+    font-size: 0.9em;
+    color: #64748b;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* 精美的主题色设计 */
+.age-btn-primary:hover {
+    border-color: #f59e0b;
+    background: linear-gradient(145deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 
+        0 12px 32px rgba(245, 158, 11, 0.25),
+        0 4px 16px rgba(217, 119, 6, 0.15);
+}
+
+.age-btn-primary:hover .age-range,
+.age-btn-primary:hover .age-desc {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.age-btn-primary:hover .age-btn-icon {
+    transform: scale(1.15) rotate(8deg);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+}
+
+.age-btn-secondary:hover {
+    border-color: #06b6d4;
+    background: linear-gradient(145deg, #22d3ee 0%, #06b6d4 50%, #0891b2 100%);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 
+        0 12px 32px rgba(6, 182, 212, 0.25),
+        0 4px 16px rgba(8, 145, 178, 0.15);
+}
+
+.age-btn-secondary:hover .age-range,
+.age-btn-secondary:hover .age-desc {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.age-btn-secondary:hover .age-btn-icon {
+    transform: scale(1.15) rotate(-8deg);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+}
+
+.age-btn-tertiary:hover {
+    border-color: #10b981;
+    background: linear-gradient(145deg, #34d399 0%, #10b981 50%, #059669 100%);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 
+        0 12px 32px rgba(16, 185, 129, 0.25),
+        0 4px 16px rgba(5, 150, 105, 0.15);
+}
+
+.age-btn-tertiary:hover .age-range,
+.age-btn-tertiary:hover .age-desc {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.age-btn-tertiary:hover .age-btn-icon {
+    transform: scale(1.15) rotate(8deg);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
 }
 
 .age-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(108, 117, 125, 0.3);
+    transform: translateY(-2px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
-/* 调整模态框宽度以适应三个按钮 */
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .age-selection-content {
+        max-width: 95%;
+        margin: 20px;
+        border-radius: 20px;
+    }
+    
+    .age-buttons {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .age-btn {
+        max-width: none;
+        min-width: 220px;
+        padding: 20px 16px;
+    }
+    
+    .age-selection-header {
+        padding: 24px 28px;
+    }
+    
+    .age-selection-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .age-selection-body {
+        padding: 32px 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .age-selection-header {
+        padding: 20px 24px;
+    }
+    
+    .age-selection-body {
+        padding: 28px 24px;
+    }
+    
+    .age-btn {
+        padding: 18px 14px;
+        min-width: 200px;
+    }
+    
+    .age-btn-icon {
+        font-size: 2.2em;
+    }
+    
+    .age-selection-content {
+        border-radius: 16px;
+    }
+}
 
 
 /* 修改 CSS 文件

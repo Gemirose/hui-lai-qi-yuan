@@ -204,15 +204,33 @@
     <div id="ageSelectionModal" class="age-selection-modal">
         <div class="age-selection-content">
             <div class="age-selection-header">
-                <h2>年龄段选择</h2>
+                <h2>🎯 选择年龄段</h2>
                 <button id="closeAgeSelection" class="close-btn">×</button>
             </div>
             <div class="age-selection-body">
-                <p>请选择您的年龄段：</p>
+                <p class="selection-subtitle">请选择适合的年龄段开始测试</p>
                 <div class="age-buttons">
-                    <button id="age4to6Btn" class="age-btn">4-6岁</button>
-                    <button id="age7to9Btn" class="age-btn">7-9岁</button>
-                    <button id="age10to12Btn" class="age-btn">10-12岁</button>
+                    <button id="age4to6Btn" class="age-btn age-btn-primary">
+                        <div class="age-btn-icon">🧸</div>
+                        <div class="age-btn-text">
+                            <span class="age-range">4-6岁</span>
+                            <span class="age-desc">启蒙阶段</span>
+                        </div>
+                    </button>
+                    <button id="age7to9Btn" class="age-btn age-btn-secondary">
+                        <div class="age-btn-icon">🎮</div>
+                        <div class="age-btn-text">
+                            <span class="age-range">7-9岁</span>
+                            <span class="age-desc">探索阶段</span>
+                        </div>
+                    </button>
+                    <button id="age10to12Btn" class="age-btn age-btn-tertiary">
+                        <div class="age-btn-icon">🚀</div>
+                        <div class="age-btn-text">
+                            <span class="age-range">10-12岁</span>
+                            <span class="age-desc">进阶阶段</span>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
