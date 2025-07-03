@@ -18,8 +18,8 @@ const defaultCoursePrizesStock = [
     { name: '再来一次', stock: -1 }
 ];
 
-// 题库数组
-const questionBank = [
+// 4-6岁题库（原有题库）
+const questionBank4to6 = [
     {
         question: "5 + 3 = ?",
         options: ["A) 7", "B) 8", "C) 9"],
@@ -31,7 +31,7 @@ const questionBank = [
         answer: "B) 慢"
     },
     {
-        question: "一周有几天？",
+        question: "一个星期有几天？",
         options: ["A) 5天", "B) 6天", "C) 7天"],
         answer: "C) 7天"
     },
@@ -97,9 +97,91 @@ const questionBank = [
     }
 ];
 
+// 7-9岁题库（新题库）
+const questionBank7to9 = [
+    {
+        question: "8 × 2 - 5 = ?",
+        options: ["A) 10", "B) 11", "C) 12"],
+        answer: "B) 11"
+    },
+    {
+        question: "一盒巧克力有12块，分给4个小朋友，每人得几块？",
+        options: ["A) 2块", "B) 3块", "C) 4块"],
+        answer: "B) 3块"
+    },
+    {
+        question: "找规律：5, 10, 15, 20, ?",
+        options: ["A) 22", "B) 25", "C) 30"],
+        answer: "B) 25"
+    },
+    {
+        question: "\"拔苗助长\"告诉我们什么道理？",
+        options: ["A) 做事要快", "B) 做事不能太着急", "C) 苗长得越高越好"],
+        answer: "B) 做事不能太着急"
+    },
+    {
+        question: "\"春风又绿江南岸\"中\"绿\"的意思是？",
+        options: ["A) 绿色的颜料", "B) 春风吹绿了植物", "C) 绿色的衣服"],
+        answer: "B) 春风吹绿了植物"
+    },
+    {
+        question: "\"高兴\"的反义词是？",
+        options: ["A) 快乐", "B) 伤心", "C) 兴奋"],
+        answer: "B) 伤心"
+    },
+    {
+        question: "植物通过什么吸收水分？",
+        options: ["A) 叶子", "B) 根", "C) 花朵"],
+        answer: "B) 根"
+    },
+    {
+        question: "下列哪种动物是昆虫？",
+        options: ["A) 蜘蛛", "B) 蝴蝶", "C) 蚯蚓"],
+        answer: "B) 蝴蝶"
+    },
+    {
+        question: "水在0℃时会变成什么？",
+        options: ["A) 冰", "B) 水蒸气", "C) 雾"],
+        answer: "A) 冰"
+    },
+    {
+        question: "看到\"红灯\"应该怎么做？",
+        options: ["A) 快速跑过去", "B) 停下来等待", "C) 慢慢走过去"],
+        answer: "B) 停下来等待"
+    },
+    {
+        question: "遇到火灾要拨打什么电话？",
+        options: ["A) 110", "B) 120", "C) 119"],
+        answer: "C) 119"
+    },
+    {
+        question: "哪种行为容易触电？",
+        options: ["A) 用干手关灯", "B) 用湿手碰插座", "C) 穿胶底鞋走路"],
+        answer: "B) 用湿手碰插座"
+    },
+    {
+        question: "端午节人们会吃什么？",
+        options: ["A) 月饼", "B) 粽子", "C) 汤圆"],
+        answer: "B) 粽子"
+    },
+    {
+        question: "《静夜思》的作者是谁？",
+        options: ["A) 杜甫", "B) 李白", "C) 白居易"],
+        answer: "B) 李白"
+    },
+    {
+        question: "中国国旗上有几颗星星？",
+        options: ["A) 4颗", "B) 5颗", "C) 6颗"],
+        answer: "B) 5颗"
+    }
+];
+
+// 当前使用的题库
+let currentQuestionBank = questionBank4to6;
+
 // 随机选择5道不重复的题目
 function getRandomQuestions() {
-    const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+    const shuffled = [...currentQuestionBank].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 5);
 }
 
@@ -234,6 +316,34 @@ function closeTestModal() {
     const testModal = document.getElementById('testModal');
     testModal.style.display = 'none';
     testModal.classList.remove('show');
+}
+
+// 显示年龄段选择模态框
+function showAgeSelection() {
+    const ageSelectionModal = document.getElementById('ageSelectionModal');
+    ageSelectionModal.style.display = 'flex';
+    ageSelectionModal.classList.add('show');
+}
+
+// 关闭年龄段选择模态框
+function closeAgeSelectionModal() {
+    const ageSelectionModal = document.getElementById('ageSelectionModal');
+    ageSelectionModal.style.display = 'none';
+    ageSelectionModal.classList.remove('show');
+}
+
+// 开始4-6岁测试
+function start4to6Test() {
+    currentQuestionBank = questionBank4to6;
+    closeAgeSelectionModal();
+    startTest();
+}
+
+// 开始7-9岁测试
+function start7to9Test() {
+    currentQuestionBank = questionBank7to9;
+    closeAgeSelectionModal();
+    startTest();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -695,7 +805,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 测试按钮事件
     if (testBtn) {
         testBtn.addEventListener('click', function() {
-            startTest();
+            showAgeSelection();
         });
     }
 
@@ -709,6 +819,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (restartTestBtn) {
         restartTestBtn.addEventListener('click', restartTest);
+    }
+
+    // 添加年龄段选择相关事件监听器
+    const closeAgeSelectionBtn = document.getElementById('closeAgeSelection');
+    const age4to6Btn = document.getElementById('age4to6Btn');
+    const age7to9Btn = document.getElementById('age7to9Btn');
+
+    if (closeAgeSelectionBtn) {
+        closeAgeSelectionBtn.addEventListener('click', closeAgeSelectionModal);
+    }
+
+    if (age4to6Btn) {
+        age4to6Btn.addEventListener('click', start4to6Test);
+    }
+
+    if (age7to9Btn) {
+        age7to9Btn.addEventListener('click', start7to9Test);
     }
 
     // 开课抽奖按钮
