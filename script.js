@@ -1,3 +1,241 @@
+// 默认库存配置
+const defaultPrizesStock = [
+    { name: 'LABUBU', stock: 1 },
+    { name: '小盲袋', stock: 240 },
+    { name: '扇子', stock: 500 },
+    { name: '学习袋', stock: 180 },
+    { name: '贴纸', stock: 300 },
+    { name: '奥特曼玩偶', stock: 2 },
+    { name: '再来一次', stock: -1 }
+];
+
+const defaultCoursePrizesStock = [
+    { name: '特等奖：价值5000元AI学习机45天使用权+200元抵用券+labubu+学习袋', stock: 1 },
+    { name: '一等奖：价值5000元AI学习机30天使用权+100元抵用券+labubu+学习袋', stock: 1 },
+    { name: '二等奖：100元抵用券+学习袋+labubu', stock: 2 },
+    { name: '三等奖：100元抵用券+围棋套装+学习袋', stock: 4 },
+    { name: '四等奖：100元抵用券+学习袋', stock: -1 },
+    { name: '再来一次', stock: -1 }
+];
+
+// 题库数组
+const questionBank = [
+    {
+        question: "5 + 3 = ?",
+        options: ["A) 7", "B) 8", "C) 9"],
+        answer: "B) 8"
+    },
+    {
+        question: "\"快\"的反义词是什么？",
+        options: ["A) 大", "B) 慢", "C) 高"],
+        answer: "B) 慢"
+    },
+    {
+        question: "一周有几天？",
+        options: ["A) 5天", "B) 6天", "C) 7天"],
+        answer: "C) 7天"
+    },
+    {
+        question: "剪刀是用来做什么的？",
+        options: ["A) 吃饭", "B) 剪纸", "C) 写字"],
+        answer: "B) 剪纸"
+    },
+    {
+        question: "哪一组全是水果？",
+        options: ["A) 香蕉、苹果、草莓", "B) 胡萝卜、青菜、土豆", "C) 面包、牛奶、鸡蛋"],
+        answer: "A) 香蕉、苹果、草莓"
+    },
+    {
+        question: "10 – 4 = ?",
+        options: ["A) 5", "B) 6", "C) 7"],
+        answer: "B) 6"
+    },
+    {
+        question: "\"春天\"之后是什么季节？",
+        options: ["A) 冬天", "B) 夏天", "C) 秋天"],
+        answer: "B) 夏天"
+    },
+    {
+        question: "哪种天气需要穿雨鞋？",
+        options: ["A) 晴天", "B) 下雨天", "C) 下雪天"],
+        answer: "B) 下雨天"
+    },
+    {
+        question: "2个苹果 + 3个梨子 = 几个水果？",
+        options: ["A) 4个", "B) 5个", "C) 6个"],
+        answer: "B) 5个"
+    },
+    {
+        question: "\"医院\"里工作的人是谁？",
+        options: ["A) 老师", "B) 医生", "C) 警察"],
+        answer: "B) 医生"
+    },
+    {
+        question: "哪个数字在4和6中间？",
+        options: ["A) 3", "B) 5", "C) 7"],
+        answer: "B) 5"
+    },
+    {
+        question: "\"红灯\"表示要做什么？",
+        options: ["A) 走", "B) 停", "C) 跑"],
+        answer: "B) 停"
+    },
+    {
+        question: "书本是用什么做的？",
+        options: ["A) 塑料", "B) 纸张", "C) 金属"],
+        answer: "B) 纸张"
+    },
+    {
+        question: "儿歌\"两只老虎\"中，老虎没有哪里？",
+        options: ["A) 眼睛", "B) 耳朵", "C) 尾巴"],
+        answer: "B) 耳朵"
+    },
+    {
+        question: "8点钟，时针和分针怎么指？",
+        options: ["A) 时针指8，分针指12", "B) 时针指12，分针指8", "C) 时针指6，分针指3"],
+        answer: "A) 时针指8，分针指12"
+    }
+];
+
+// 随机选择5道不重复的题目
+function getRandomQuestions() {
+    const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 5);
+}
+
+// 测试相关变量
+let currentTestQuestions = [];
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let correctAnswers = 0;
+
+// 开始测试
+function startTest() {
+    currentTestQuestions = getRandomQuestions();
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    correctAnswers = 0;
+    
+    // 显示测试模态框
+    const testModal = document.getElementById('testModal');
+    testModal.style.display = 'flex';
+    testModal.classList.add('show');
+    
+    // 显示第一道题
+    showCurrentQuestion();
+}
+
+// 显示当前题目
+function showCurrentQuestion() {
+    const questionContainer = document.getElementById('questionContainer');
+    const testResult = document.getElementById('testResult');
+    const questionNumber = document.getElementById('questionNumber');
+    const totalQuestions = document.getElementById('totalQuestions');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const nextButton = document.getElementById('nextQuestion');
+    
+    // 隐藏结果，显示题目容器
+    testResult.style.display = 'none';
+    questionContainer.style.display = 'block';
+    
+    // 更新进度
+    questionNumber.textContent = currentQuestionIndex + 1;
+    totalQuestions.textContent = currentTestQuestions.length;
+    
+    // 显示题目
+    const currentQuestion = currentTestQuestions[currentQuestionIndex];
+    questionText.textContent = currentQuestion.question;
+    
+    // 清空并重新生成选项
+    optionsContainer.innerHTML = '';
+    
+    currentQuestion.options.forEach((option, index) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.className = 'option-btn';
+        optionBtn.textContent = option;
+        optionBtn.onclick = () => selectOption(index, option);
+        optionsContainer.appendChild(optionBtn);
+    });
+    
+    // 隐藏下一题按钮
+    nextButton.style.display = 'none';
+}
+
+// 选择选项
+function selectOption(selectedIndex, selectedOption) {
+    const optionBtns = document.querySelectorAll('.option-btn');
+    const nextButton = document.getElementById('nextQuestion');
+    const currentQuestion = currentTestQuestions[currentQuestionIndex];
+    
+    // 禁用所有选项按钮
+    optionBtns.forEach(btn => btn.disabled = true);
+    
+    // 标记选中的选项
+    optionBtns[selectedIndex].classList.add('selected');
+    
+    // 记录用户答案
+    userAnswers.push(selectedOption);
+    
+    // 检查答案是否正确（不显示给用户）
+    if (selectedOption === currentQuestion.answer) {
+        correctAnswers++;
+    }
+    
+    // 显示下一题按钮或完成按钮
+    if (currentQuestionIndex < currentTestQuestions.length - 1) {
+        nextButton.textContent = '下一题';
+        nextButton.style.display = 'block';
+        nextButton.onclick = nextQuestion;
+    } else {
+        nextButton.textContent = '完成测试';
+        nextButton.style.display = 'block';
+        nextButton.onclick = finishTest;
+    }
+}
+
+// 下一题
+function nextQuestion() {
+    currentQuestionIndex++;
+    showCurrentQuestion();
+}
+
+// 完成测试
+function finishTest() {
+    const questionContainer = document.getElementById('questionContainer');
+    const testResult = document.getElementById('testResult');
+    const percentageValue = document.getElementById('percentageValue');
+    
+    // 隐藏题目容器，显示结果
+    questionContainer.style.display = 'none';
+    testResult.style.display = 'block';
+    
+    // 生成随机百分比（97.0% - 99.9%）
+    const randomPercentage = (Math.random() * 2.9 + 97.0).toFixed(1);
+    percentageValue.textContent = randomPercentage;
+    
+    // 更新结果文本
+    const encouragementText = document.querySelector('.encouragement');
+    encouragementText.innerHTML = `
+        <h4>🎉 恭喜您完成测试！</h4>
+        <p>您超越了全世界 <span style="color: #ff6b6b; font-weight: bold;">${randomPercentage}%</span> 的人！</p>
+        <p style="color: #4ecdc4; font-weight: bold; margin-top: 15px;">您特别适合学围棋！</p>
+        <p style="color: #666; margin-top: 10px;">围棋能够锻炼逻辑思维、提高专注力，非常适合像您这样聪明的人学习。</p>
+    `;
+}
+
+// 重新开始测试
+function restartTest() {
+    startTest();
+}
+
+// 关闭测试模态框
+function closeTestModal() {
+    const testModal = document.getElementById('testModal');
+    testModal.style.display = 'none';
+    testModal.classList.remove('show');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // 获取DOM元素
     const lotteryBtn = document.getElementById('lotteryBtn');
@@ -454,6 +692,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // 测试按钮事件
+    if (testBtn) {
+        testBtn.addEventListener('click', function() {
+            startTest();
+        });
+    }
+
+    // 添加测试模态框的关闭事件
+    const closeTestBtn = document.getElementById('closeTest');
+    const restartTestBtn = document.getElementById('restartTest');
+    
+    if (closeTestBtn) {
+        closeTestBtn.addEventListener('click', closeTestModal);
+    }
+    
+    if (restartTestBtn) {
+        restartTestBtn.addEventListener('click', restartTest);
+    }
+
     // 开课抽奖按钮
     if (courseLotteryBtn) {
         courseLotteryBtn.addEventListener('click', function() {
@@ -858,23 +1115,3 @@ document.addEventListener('DOMContentLoaded', function() {
     currentPrizeList = prizes;
     displayLotteryHistory();
 });
-
-    // 默认库存配置
-    const defaultPrizesStock = [
-        { name: 'LABUBU', stock: 1 },
-        { name: '小盲袋', stock: 240 },
-        { name: '扇子', stock: 500 },
-        { name: '学习袋', stock: 180 },
-        { name: '贴纸', stock: 300 },
-        { name: '奥特曼玩偶', stock: 2 },
-        { name: '再来一次', stock: -1 }
-    ];
-
-    const defaultCoursePrizesStock = [
-        { name: '特等奖：价值5000元AI学习机45天使用权+200元抵用券+labubu+学习袋', stock: 1 },
-        { name: '一等奖：价值5000元AI学习机30天使用权+100元抵用券+labubu+学习袋', stock: 1 },
-        { name: '二等奖：100元抵用券+学习袋+labubu', stock: 2 },
-        { name: '三等奖：100元抵用券+围棋套装+学习袋', stock: 4 },
-        { name: '四等奖：100元抵用券+学习袋', stock: -1 },
-        { name: '再来一次', stock: -1 }
-    ];
