@@ -379,9 +379,9 @@ function finishTest() {
     const encouragementText = document.querySelector('.encouragement');
     encouragementText.innerHTML = `
         <h4>🎉 恭喜您完成测试！</h4>
-        <p>您超越了全世界 <span style="color: #ff6b6b; font-weight: bold;">${randomPercentage}%</span> 的人！</p>
-        <p style="color: #4ecdc4; font-weight: bold; margin-top: 15px;">您特别适合学围棋！</p>
-        <p style="color: #666; margin-top: 10px;">围棋能够锻炼逻辑思维、提高专注力，非常适合像您这样聪明的人学习。</p>
+        <p>您超越了全世界 <span style="color: #ff6b6b; font-weight: bold;">${randomPercentage}%</span> 的小朋友！</p>
+        <p style="color: #4ecdc4; font-weight: bold; margin-top: 15px;">你特别适合学围棋！</p>
+        <p style="color: #666; margin-top: 10px;">让我们一起进入欢乐有趣的围棋世界吧！</p>
     `;
 }
 
