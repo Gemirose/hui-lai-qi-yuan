@@ -324,14 +324,27 @@ function selectOption(selectedIndex, selectedOption) {
     const nextButton = document.getElementById('nextQuestion');
     const currentQuestion = currentTestQuestions[currentQuestionIndex];
     
-    // 禁用所有选项按钮
-    optionBtns.forEach(btn => btn.disabled = true);
+    // 移除之前的选中状态
+    optionBtns.forEach(btn => {
+        btn.classList.remove('selected');
+        btn.disabled = false; // 保持按钮可用，允许重新选择
+    });
     
-    // 标记选中的选项
+    // 标记当前选中的选项
     optionBtns[selectedIndex].classList.add('selected');
     
-    // 记录用户答案
-    userAnswers.push(selectedOption);
+    // 如果之前已经选择过，先移除之前的答案
+    if (userAnswers.length > currentQuestionIndex) {
+        // 重新计算正确答案数
+        if (userAnswers[currentQuestionIndex] === currentQuestion.answer) {
+            correctAnswers--;
+        }
+        // 更新当前题目的答案
+        userAnswers[currentQuestionIndex] = selectedOption;
+    } else {
+        // 第一次选择，直接添加答案
+        userAnswers.push(selectedOption);
+    }
     
     // 检查答案是否正确（不显示给用户）
     if (selectedOption === currentQuestion.answer) {
