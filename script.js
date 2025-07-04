@@ -86,11 +86,6 @@ const questionBank4to6 = [
         answer: "B) 纸张"
     },
     {
-        question: "儿歌\"两只老虎\"中，老虎没有哪里？",
-        options: ["A) 眼睛", "B) 耳朵", "C) 尾巴"],
-        answer: "B) 耳朵"
-    },
-    {
         question: "8点钟，时针和分针怎么指？",
         options: ["A) 时针指8，分针指12", "B) 时针指12，分针指8", "C) 时针指6，分针指3"],
         answer: "A) 时针指8，分针指12"
@@ -379,8 +374,8 @@ function finishTest() {
     const encouragementText = document.querySelector('.encouragement');
     encouragementText.innerHTML = `
         <h4>🎉 恭喜您完成测试！</h4>
-        <p>您超越了全世界 <span style="color: #ff6b6b; font-weight: bold;">${randomPercentage}%</span> 的小朋友！</p>
-        <p style="color: #4ecdc4; font-weight: bold; margin-top: 15px;">你特别适合学围棋！</p>
+        <p>你超越了全世界 <span style="color: #ff6b6b; font-weight: bold;">${randomPercentage}%</span> 的小朋友！</p>
+        <p style="color: #4ecdc4; font-weight: bold; margin-top: 15px;">你特别有学围棋的天赋！</p>
         <p style="color: #666; margin-top: 10px;">让我们一起进入欢乐有趣的围棋世界吧！</p>
     `;
 }
