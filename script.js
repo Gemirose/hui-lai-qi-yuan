@@ -10,11 +10,11 @@ const defaultPrizesStock = [
 ];
 
 const defaultCoursePrizesStock = [
-    { name: '特等奖：价值5000元AI学习机45天使用权+200元抵用券+labubu+学习袋', stock: 1 },
-    { name: '一等奖：价值5000元AI学习机30天使用权+100元抵用券+labubu+学习袋', stock: 1 },
-    { name: '二等奖：100元抵用券+学习袋+labubu', stock: 2 },
-    { name: '三等奖：100元抵用券+围棋套装+学习袋', stock: 4 },
-    { name: '四等奖：100元抵用券+学习袋', stock: -1 },
+    { name: '特等奖：价值5000元AI学习机45天使用权+labubu+学习袋', stock: 1 },
+    { name: '一等奖：价值5000元AI学习机30天使用权+labubu+学习袋', stock: 1 },
+    { name: '二等奖：学习袋+labubu', stock: 2 },
+    { name: '三等奖：围棋套装+学习袋', stock: 4 },
+    { name: '四等奖：学习袋+扇子', stock: -1 },
     { name: '再来一次', stock: -1 }
 ];
 
@@ -466,11 +466,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 开课抽奖专用奖品列表
     const coursePrizes = [
-        { name: '特等奖：价值5000元AI学习机45天使用权+200元抵用券+labubu+学习袋', probability: 0.01, stock: 1, won: 0 },
-        { name: '一等奖：价值5000元AI学习机30天使用权+100元抵用券+labubu+学习袋', probability: 0.01, stock: 1, won: 0 },
-        { name: '二等奖：100元抵用券+学习袋+labubu', probability: 0.02, stock: 2, won: 0 },
-        { name: '三等奖：100元抵用券+围棋套装+学习袋', probability: 0.04, stock: 4, won: 0 },
-        { name: '四等奖：100元抵用券+学习袋', probability: 0.32, stock: -1, won: 0 },  // 无限库存
+        { name: '特等奖：价值5000元AI学习机45天使用权+labubu+学习袋', probability: 0.01, stock: 1, won: 0 },
+        { name: '一等奖：价值5000元AI学习机30天使用权+labubu+学习袋', probability: 0.01, stock: 1, won: 0 },
+        { name: '二等奖：学习袋+labubu', probability: 0.02, stock: 2, won: 0 },
+        { name: '三等奖：围棋套装+学习袋', probability: 0.04, stock: 4, won: 0 },
+        { name: '四等奖：学习袋+扇子', probability: 0.32, stock: -1, won: 0 },  // 无限库存
         { name: '再来一次', probability: 0.6, stock: -1, won: 0 }  // 无限库存
     ];
 
